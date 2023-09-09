@@ -6,6 +6,6 @@ export default defineNuxtConfig({
     preset: 'vercel-edge', // you can use 'vercel' or other providers here
   },
   runtimeConfig: {
-    openaiApiKey: '',
+    openaiApiKey: process.env.NUXT_OPENAI_API_KEY,
   },
 });
