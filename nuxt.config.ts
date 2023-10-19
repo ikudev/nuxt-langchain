@@ -8,4 +8,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     openaiApiKey: process.env.NUXT_OPENAI_API_KEY,
   },
+  tailwindcss: {
+    config: {
+      plugins: [require('daisyui')]
+    }
+  }
 });
