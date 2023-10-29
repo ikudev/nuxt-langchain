@@ -6,7 +6,8 @@ export default defineNuxtConfig({
     preset: 'vercel-edge', // you can use 'vercel' or other providers here
   },
   runtimeConfig: {
-    openaiApiKey: process.env.NUXT_OPENAI_API_KEY,
+    openaiApiKey: process.env.OPENAI_API_KEY,
+    serpApiKey: process.env.SERPAPI_API_KEY,
   },
   tailwindcss: {
     config: {

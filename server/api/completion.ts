@@ -1,8 +1,10 @@
-import { PromptTemplate } from 'langchain/prompts';
+import { SerpAPI } from 'langchain/tools';
+import { Calculator } from 'langchain/tools/calculator';
 import { ChatOpenAI } from 'langchain/chat_models/openai';
-import { StreamingTextResponse } from 'ai';
+import { initializeAgentExecutorWithOptions } from 'langchain/agents';
+import { PromptTemplate } from 'langchain/prompts';
 import { BytesOutputParser } from 'langchain/schema/output_parser';
-import _ from 'lodash';
+import { LangChainStream, StreamingTextResponse } from 'ai';
 
 export default defineLazyEventHandler(() => {
   const apiKey = useRuntimeConfig().openaiApiKey;
@@ -10,28 +12,24 @@ export default defineLazyEventHandler(() => {
     throw createError('Missing OpenAI API key');
   }
 
-  const template =
-    'What would be a good company name for a company that makes or provides {product}? Give one best suited option.';
-  const promptTemplate = new PromptTemplate({
-    template,
-    inputVariables: ['product']
-  });
-  const model = new ChatOpenAI({
-    openAIApiKey: apiKey,
-    streaming: true,
-    temperature: 0.8
-  });
-  const outputParser = new BytesOutputParser();
+  const model = new ChatOpenAI({ openAIApiKey: apiKey });
+
+  const serpApiKey = useRuntimeConfig().serpApiKey;
+  if (!serpApiKey) {
+    throw createError('Missing SerpApi key');
+  }
 
   return defineEventHandler(async (event) => {
     const body = await readBody(event);
-    const { prompt } = JSON.parse(body);
-    const params = { product: prompt };
+    const params = JSON.parse(body);
     console.log(params);
-    const stream = await promptTemplate
-      .pipe(model)
-      .pipe(outputParser)
-      .stream(params);
-    return new StreamingTextResponse(stream);
+
+    const tools = [new SerpAPI(serpApiKey), new Calculator()];
+    const executor = await initializeAgentExecutorWithOptions(tools, model, {
+      agentType: 'zero-shot-react-description'
+    });
+
+    const { output } = await executor.invoke({ input: params.prompt });
+    return output;
   });
 });

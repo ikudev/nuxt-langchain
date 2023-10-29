@@ -16,8 +16,7 @@
 
 <script lang="ts" setup>
 const routes = [
-  { name: 'Demo', path: '/' },
-  { name: 'Chat', path: '/chat' },
-  { name: 'Agent', path: '/agent' }
+  { name: 'Agent', path: '/' },
+  { name: 'Chat', path: '/chat' }
 ];
 </script>
