@@ -13,9 +13,7 @@ export default defineLazyEventHandler(() => {
   });
 
   return defineEventHandler(async (event) => {
-    // Extract the `prompt` from the body of the request
     const { messages } = await readBody(event);
-
     const { stream, handlers } = LangChainStream();
     llm
       .call(
@@ -29,7 +27,6 @@ export default defineLazyEventHandler(() => {
       )
       // eslint-disable-next-line no-console
       .catch(console.error);
-
     return new StreamingTextResponse(stream);
   });
 });

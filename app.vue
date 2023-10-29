@@ -1,10 +1,10 @@
 <template>
-  <div class="container w-1/2 mx-auto">
+  <div class="container w-1/2 mx-auto flex flex-col h-screen">
     <div class="tabs">
       <NuxtLink
         v-for="rt in routes"
         class="tab tab-lg tab-lifted"
-        :class="{ 'tab-active': (rt.path === $route.path) }"
+        :class="{ 'tab-active': rt.path === $route.path }"
         :to="rt.path"
       >
         {{ rt.name }}
@@ -18,6 +18,6 @@
 const routes = [
   { name: 'Demo', path: '/' },
   { name: 'Chat', path: '/chat' },
-  { name: 'Agent', path: '/agent' },
+  { name: 'Agent', path: '/agent' }
 ];
 </script>

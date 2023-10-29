@@ -1,14 +1,7 @@
 <template>
-  <div>
-    Chat
-  </div>
+  <Chatbox class="h-full" />
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup></script>
 
-</script>
-
-<style>
-
-</style>
-
+<style></style>

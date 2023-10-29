@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-2">
     <div
-      class="overflow-scroll h-screen border border-solid border-gray-300 rounded p-4"
+      class="overflow-scroll border border-solid border-gray-300 rounded p-4 h-[90%]"
     >
       <template v-for="message in messages" :key="message.id">
         <div
@@ -17,12 +17,12 @@
               </div>
             </div>
             <strong>
-              {{ isMessageFromUser(message) ? 'User' : 'AI' }}
+              {{ isMessageFromUser(message) ? 'Me' : 'AI' }}
             </strong>
           </div>
           <div class="chat-header"></div>
           <div
-            class="chat-bubble"
+            class="chat-bubble mb-4"
             :class="
               isMessageFromUser(message)
                 ? 'chat-bubble-secondary'
@@ -45,13 +45,13 @@
 </template>
 
 <script lang="ts" setup>
-import { useChat, Message } from 'ai/vue';
+import { useChat } from 'ai/vue';
 
 const { messages, input, handleSubmit } = useChat({
-  headers: { 'Content-Type': 'application/json' },
+  headers: { 'Content-Type': 'application/json' }
 });
 
-function isMessageFromUser(message: Message) {
+function isMessageFromUser(message: any) {
   return message.role === 'user';
 }
 </script>
