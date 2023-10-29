@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-icon'],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', 'nuxt-lodash'],
   nitro: {
     preset: 'vercel-edge', // you can use 'vercel' or other providers here
   },
@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   },
   tailwindcss: {
     config: {
-      plugins: [require('daisyui')]
-    }
-  }
+      plugins: [require('daisyui')],
+    },
+  },
 });
