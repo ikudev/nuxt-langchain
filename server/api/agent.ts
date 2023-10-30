@@ -2,9 +2,6 @@ import { SerpAPI } from 'langchain/tools';
 import { Calculator } from 'langchain/tools/calculator';
 import { ChatOpenAI } from 'langchain/chat_models/openai';
 import { initializeAgentExecutorWithOptions } from 'langchain/agents';
-import { PromptTemplate } from 'langchain/prompts';
-import { BytesOutputParser } from 'langchain/schema/output_parser';
-import { LangChainStream, StreamingTextResponse } from 'ai';
 
 export default defineLazyEventHandler(() => {
   const apiKey = useRuntimeConfig().openaiApiKey;

@@ -1,8 +1,9 @@
 <template>
   <QueryBox
-    title="Ask me"
-    placeholder="Ask me anything..."
-    buttonText="Ask"
+    title="Hi, I'm a naming bot!"
+    placeholder="Tell me what your company makes..."
+    button-text="Give a name"
+    endpoint="name"
   />
 </template>
 

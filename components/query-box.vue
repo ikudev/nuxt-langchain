@@ -11,7 +11,7 @@
       />
       <button
         type="submit"
-        class="btn btn-outline btn-primary rounded-lg w-32 mx-auto"
+        class="btn btn-outline btn-primary rounded-lg fit-content mx-auto"
         :disabled="isLoading"
       >
         {{ buttonText }}
@@ -27,12 +27,16 @@
 <script lang="ts" setup>
 import { useCompletion } from 'ai/vue';
 
-const props = defineProps({
-  title: String,
-  placeholder: String,
-  buttonText: String
+const props = defineProps<{
+  title: string;
+  placeholder: string;
+  buttonText: string;
+  endpoint: string | 'completion';
+}>();
+
+const { input, handleSubmit, completion, isLoading } = useCompletion({
+  api: `/api/${props.endpoint}`
 });
-const { input, handleSubmit, completion, isLoading } = useCompletion();
 </script>
 
 <style></style>
